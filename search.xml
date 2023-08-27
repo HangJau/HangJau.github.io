@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>Linux安装docker</title>
+      <link href="/2023/08/27/jiao-cheng/linux-an-zhuang-docker/"/>
+      <url>/2023/08/27/jiao-cheng/linux-an-zhuang-docker/</url>
+      
+        <content type="html"><![CDATA[<p>记录下docker服务的安装，目前只涉及到了centos系统，此贴会记录博主在不同系统中的docker安装教程。(其他的什么时候更新就看博主啥时候遇到了)</p><h3 id="CentOS-docker-安装"><a href="#CentOS-docker-安装" class="headerlink" title="CentOS docker 安装"></a>CentOS docker 安装</h3><h4 id="清除已安装的部分-若是新机器可跳过"><a href="#清除已安装的部分-若是新机器可跳过" class="headerlink" title="清除已安装的部分(若是新机器可跳过)"></a>清除已安装的部分(若是新机器可跳过)</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>docker-client <span class="token punctuation">\</span>docker-client-latest <span class="token punctuation">\</span>docker-common <span class="token punctuation">\</span>docker-latest <span class="token punctuation">\</span>docker-latest-logrotate <span class="token punctuation">\</span>docker-logrotate <span class="token punctuation">\</span>docker-engine<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="前置处理"><a href="#前置处理" class="headerlink" title="前置处理"></a>前置处理</h4><p>yum-complete-transaction    清理未完成事务<br>yum install -y yum-utils    安装依赖工具<br>yum clean all               清楚未完成的包和缓存<br>yum  update                 更新</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum <span class="token function">install</span> <span class="token parameter variable">-y</span> yum-utils <span class="token operator">&amp;&amp;</span> yum clean all <span class="token operator">&amp;&amp;</span> yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="安装底层依赖"><a href="#安装底层依赖" class="headerlink" title="安装底层依赖"></a>安装底层依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> device-mapper-persistent-data lvm2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="更新yum缓存"><a href="#更新yum缓存" class="headerlink" title="更新yum缓存"></a>更新yum缓存</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum makecache fast<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> docker-ce docker-ce-cli containerd.io<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span> <span class="token operator">&amp;&amp;</span> systemctl status <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="测试运行docker"><a href="#测试运行docker" class="headerlink" title="测试运行docker"></a>测试运行docker</h4><p>此步会输出hello-world，输出成功即docker安装成功，就可以愉快的玩耍啦。🎉🎉</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python生活-定时发送新闻联播到微信</title>
       <link href="/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/"/>
       <url>/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/</url>
