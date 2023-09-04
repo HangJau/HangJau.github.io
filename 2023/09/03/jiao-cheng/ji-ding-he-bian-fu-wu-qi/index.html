@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux安装docker, Mr Jau">
-    <meta name="description" content="记录下docker服务的安装，目前只涉及到了centos系统，此贴会记录博主在不同系统中的docker安装教程。(其他的什么时候更新就看博主啥时候遇到了)
-CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
+    <meta name="keywords" content="机顶盒秒变服务器, Mr Jau">
+    <meta name="description" content="从酷安上了解到极低成本的服务器，那就是将机顶盒刷入armbian系统。启动6~7个docker也无压力；机顶盒功率也才几瓦。跑跑自己的脚本啥的完全够用。故立马在某鱼上捡垃圾，最后70块上车9新魔百和M401A盒子(2+16)+电源，已roo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Linux安装docker | Mr Jau</title>
+    <title>机顶盒秒变服务器 | Mr Jau</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -202,12 +201,12 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://e0180ed0.picture-bed-8ov.pages.dev/file/9d7801894409a6629d28d.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://im.gurl.eu.org/file/77e832e61eb151350a9c7.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux安装docker</h1>
+                    <h1 class="description center-align post-title">机顶盒秒变服务器</h1>
                 </div>
             </div>
         </div>
@@ -231,12 +230,20 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
-                            </a>
-                        
                             <a href="/tags/linux/">
                                 <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/tags/armbian/">
+                                <span class="chip bg-color">armbian</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/">
+                                <span class="chip bg-color">魔百和</span>
+                            </a>
+                        
+                            <a href="/tags/M401A/">
+                                <span class="chip bg-color">M401A</span>
                             </a>
                         
                     </div>
@@ -260,7 +267,7 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-08-27
+                    2023-09-03
                 </div>
                 
 
@@ -284,22 +291,67 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>记录下docker服务的安装，目前只涉及到了centos系统，此贴会记录博主在不同系统中的docker安装教程。(其他的什么时候更新就看博主啥时候遇到了)</p>
-<h3 id="CentOS-docker-安装"><a href="#CentOS-docker-安装" class="headerlink" title="CentOS docker 安装"></a>CentOS docker 安装</h3><h4 id="清除已安装的部分-若是新机器可跳过"><a href="#清除已安装的部分-若是新机器可跳过" class="headerlink" title="清除已安装的部分(若是新机器可跳过)"></a>清除已安装的部分(若是新机器可跳过)</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>docker-client <span class="token punctuation">\</span>docker-client-latest <span class="token punctuation">\</span>docker-common <span class="token punctuation">\</span>docker-latest <span class="token punctuation">\</span>docker-latest-logrotate <span class="token punctuation">\</span>docker-logrotate <span class="token punctuation">\</span>docker-engine<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <p>从酷安上了解到极低成本的服务器，那就是将机顶盒刷入armbian系统。启动6~7个docker也无压力；机顶盒功率也才几瓦。跑跑自己的脚本啥的完全够用。故立马在某鱼上捡垃圾，最后70块上车9新魔百和M401A盒子(2+16)+电源，已root。借此记录刷入流程，供大家参考。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>1、<strong>8G&gt;&#x3D;U盘 一个</strong>(必须是好的 🙄)</p>
+<p>2、<strong>网线一根</strong>(肯定能连上网的 👌)</p>
+<p>3、<strong>电脑一台</strong>(笔记本不行，因为机顶盒需要键盘，不能拆笔记本的，口子也对不上 😜)</p>
+<p>4、<strong>键盘一个</strong>(机顶盒不能意念写入( •̀ ω •́ )✧)</p>
+<p>以上有的就不用操心了，耐心等盒子到手就OK。可以先将armbian镜像写入到U盘。</p>
+<h3 id="镜像写入U盘"><a href="#镜像写入U盘" class="headerlink" title="镜像写入U盘"></a>镜像写入U盘</h3><p>准备刷写工具：</p>
+<p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balenaEtcher</a></p>
+<h4 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h4><p>我是购买的魔百和M401A机顶盒 使用的芯片是amlogic-s905l3a，使用的镜像是ophub大佬的开源仓库<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian">amlogic-s9xxx-armbian</a> (由衷感谢ophub大佬 ❤)</p>
+<p>进入仓库后前往release下载对应芯片的armbian系统(这里jammy是基于Ubuntu的镜像，bullseye 是基于Debian的镜像，看自己选择了)<br>Armbian_23.08.0_amlogic_s905l3a_jammy_6.1.46_server_2023.08.19.img.gz 镜像</p>
+<p><img src="https://im.gurl.eu.org/file/dcddfd70c279c5d46a06f.png" alt="镜像"></p>
+<p><strong>Tips</strong>:</p>
+<p>镜像若非img结尾则是一个非镜像文件需要解压</p>
+<h4 id="刷写镜像"><a href="#刷写镜像" class="headerlink" title="刷写镜像"></a>刷写镜像</h4><p>U盘插入电脑，打开balenaEtcher，点击“<strong>从文件烧录</strong>”选择下载的镜像文件(img结尾的)，选择目标磁盘为我们的U盘，点击烧录即可。此时等待烧录完成和校验，U盘会自动弹出。此时我们的系统已写入到U盘中。</p>
+<p><img src="https://im.gurl.eu.org/file/5ac23b0a58a238b523b94.png" alt="烧录镜像"></p>
+<h4 id="修改引导为我们的机顶盒芯片"><a href="#修改引导为我们的机顶盒芯片" class="headerlink" title="修改引导为我们的机顶盒芯片"></a>修改引导为我们的机顶盒芯片</h4><p>1、U盘重新插入电脑，若能读取到U盘文件则打开boot文件夹下的 <strong>dtb&#x2F;amlogic&#x2F;</strong> 查找一下对应芯片名称的dtb文件并复制该dtb文件的名称</p>
+<p>2、编辑boot文件夹下的<strong>uEnv.txt</strong>文件,将FDT的最后dtb文件名提换成上一步复制的文件名称并保存uEnv文件</p>
+<p><img src="https://im.gurl.eu.org/file/a96fdd8ae2d5a05bf5bec.png" alt="uEnv文件"></p>
+<p><strong>Tips</strong>:</p>
+<p>1、若U盘插入后windows无法识别到U盘最简单的解决方式是换一个Apple电脑插入进行修改。(不得不说苹果🍎大法好)</p>
+<p>2、若没有苹果电脑可以尝试windows 磁盘管理 看是否存在磁盘未被设定盘符导致无法加载到<strong>我的电脑</strong>，若有的话设定一下盘符既可打开U盘内容</p>
+<p><strong>以上准备工作就已经准备OK，机顶盒到手就可以刷入。</strong></p>
+<h3 id="armbian刷入机顶盒"><a href="#armbian刷入机顶盒" class="headerlink" title="armbian刷入机顶盒"></a>armbian刷入机顶盒</h3><p>首先还是先将机顶盒接电，正常启动先验证下机顶盒是否正常。(毕竟二手先确认货正不正)</p>
+<h4 id="外置启动"><a href="#外置启动" class="headerlink" title="外置启动"></a>外置启动</h4><p>1、正常插入网线、视频输出、电源启动机顶盒</p>
+<p>2、当进入到盒子系统后，去到盒子的已安装的app目录会有一个外置启动器之类的外置启动。</p>
+<p>3、点击外置启动当点击确认后立即，光速，风一样的插入刷写好系统的U盘到离网线插口最近的那个USB口上</p>
+<p>4、此时等待机顶盒从外部启动我们刷写到U盘中的armbian系统</p>
+<p>5、当你看到屏幕开始刷代码(彩虹)的时候证明就已经进入到armbian系统了</p>
+<p>6、当加载完成后会停在输入密码的阶段，输入密码<strong>1234</strong></p>
+<p>7、选择shell类型，选择1 <strong>bash</strong></p>
+<p>8、创建一个用户，设置用户名和密码以及一些什么真实名称啥的</p>
+<p>9、设置时区，和设置语言，若你插入了网线那这里会自动获取，只需要回车一下就行</p>
+<p>9、等待初始化完成后就会进入到armbian系统了(此时启动的是我们U盘里面的系统)</p>
+<p><img src="https://im.gurl.eu.org/file/8546315aaf28e61d99265.png" alt="5步骤"></p>
+<p><img src="https://im.gurl.eu.org/file/c3a9d47d7f38dd5bb7e08.png" alt="7~9步骤"></p>
+<h4 id="将系统写入到机顶盒"><a href="#将系统写入到机顶盒" class="headerlink" title="将系统写入到机顶盒"></a>将系统写入到机顶盒</h4><p>上一步中不是已经进入到系统了吗？ 直接输入写入命令(下方命令)此时会列出能够写入的机顶盒型号。选择我们对应的机顶盒型号并输入对应的ID，这里我的是M401A则<strong>选择ID”306“</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">armbian-install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="前置处理"><a href="#前置处理" class="headerlink" title="前置处理"></a>前置处理</h4><p>yum-complete-transaction    清理未完成事务<br>yum install -y yum-utils    安装依赖工具<br>yum clean all               清楚未完成的包和缓存<br>yum  update                 更新</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum <span class="token function">install</span> <span class="token parameter variable">-y</span> yum-utils <span class="token operator">&amp;&amp;</span> yum clean all <span class="token operator">&amp;&amp;</span> yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://im.gurl.eu.org/file/76575a6eb7a18b7e7c1a6.png" alt="选择机顶盒型号"></p>
+<p>2、选择系统磁盘格式为ext4,而后等待系统写入到机顶盒就行</p>
+<p><img src="https://im.gurl.eu.org/file/bda5786faedf002ed3191.png" alt="磁盘格式"></p>
+<p>3、当页面不在滚动出现<strong>root@armbian:~#</strong> 输入<strong>poweroff</strong>关机</p>
+<p>4、当机顶盒完全关机后 拔下U盘，拔下电源，再重新插入电源，按电源键开机。此时若正常启动后会让输入登录用户名和密码输入root 或者刚我们创建的用户都行，当进入到下面页面则系统刷入成功，就可以愉快的玩耍啦。</p>
+<p><img src="https://im.gurl.eu.org/file/1f9cfecb2370e6fa8b598.png" alt="进入系统"></p>
+<h3 id="安装一些必要软件"><a href="#安装一些必要软件" class="headerlink" title="安装一些必要软件"></a>安装一些必要软件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新一下软件包索引</span>
+<span class="token function">apt</span> update <span class="token parameter variable">-y</span>
 
-<h4 id="安装底层依赖"><a href="#安装底层依赖" class="headerlink" title="安装底层依赖"></a>安装底层依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> device-mapper-persistent-data lvm2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 安装nettools</span>
+<span class="token function">apt</span> <span class="token function">install</span> net-tools <span class="token parameter variable">-y</span>
+<span class="token comment"># 验证</span>
+<span class="token function">ifconfig</span>
 
-<h4 id="更新yum缓存"><a href="#更新yum缓存" class="headerlink" title="更新yum缓存"></a>更新yum缓存</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum makecache fast<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 安装docker  选择docker ID 中途可能要选择下载软件的地址 选择阿里云的即可</span>
+armbian-software
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> docker-ce docker-ce-cli containerd.io<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span> <span class="token operator">&amp;&amp;</span> systemctl status <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个刷写过程并不难，照着教程操作即可，若有问题百度一下就能解决。本次刷写我这边未遇到任何问题一把过。</p>
+<p>接下来谈谈该如何使用可以安装docker 那玩法就多了，docker拉取青龙面板，作为脚本管理。也可以拉取lamp搭建靶场等。自己的一些定时脚本，安装HA做家具智能中控，安装openwrt做软路由等等。</p>
+<p>刷新过程可参考：<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VL411z7Mk/?spm_id_from=pageDriver&vd_source=97daad23423657e272eee1d19843efcf">机顶盒刷armbian全程详解</a></p>
 
-<h4 id="测试运行docker"><a href="#测试运行docker" class="headerlink" title="测试运行docker"></a>测试运行docker</h4><p>此步会输出hello-world，输出成功即docker安装成功，就可以愉快的玩耍啦。🎉🎉</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -325,7 +377,7 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://HangJau.github.io/2023/08/27/jiao-cheng/linux-an-zhuang-docker/">https://HangJau.github.io/2023/08/27/jiao-cheng/linux-an-zhuang-docker/</a>
+                    <a href="https://HangJau.github.io/2023/09/03/jiao-cheng/ji-ding-he-bian-fu-wu-qi/">https://HangJau.github.io/2023/09/03/jiao-cheng/ji-ding-he-bian-fu-wu-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -363,12 +415,20 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
-                                </a>
-                            
                                 <a href="/tags/linux/">
                                     <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/armbian/">
+                                    <span class="chip bg-color">armbian</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/">
+                                    <span class="chip bg-color">魔百和</span>
+                                </a>
+                            
+                                <a href="/tags/M401A/">
+                                    <span class="chip bg-color">M401A</span>
                                 </a>
                             
                         </div>
@@ -447,9 +507,10 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/09/03/jiao-cheng/ji-ding-he-bian-fu-wu-qi/">
                     <div class="card-image">
@@ -466,9 +527,9 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -481,6 +542,7 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -511,13 +573,12 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/">
+                <a href="/2023/08/27/jiao-cheng/linux-an-zhuang-docker/">
                     <div class="card-image">
                         
+                        <img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/9d7801894409a6629d28d.png" class="responsive-img" alt="Linux安装docker">
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python生活-定时发送新闻联播到微信">
-                        
-                        <span class="card-title">Python生活-定时发送新闻联播到微信</span>
+                        <span class="card-title">Linux安装docker</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -528,14 +589,14 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%B8%80%E4%BA%9B%E8%84%9A%E6%9C%AC/" class="post-category">
-                                    一些脚本
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
                                 </a>
                             
                             
@@ -545,12 +606,12 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
-                    <a href="/tags/%E6%96%B0%E9%97%BB/">
-                        <span class="chip bg-color">新闻</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
                     </a>
                     
                 </div>
