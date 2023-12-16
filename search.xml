@@ -4,6 +4,70 @@
   
     
     <entry>
+      <title>linux下v2ray客户端安装</title>
+      <link href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/"/>
+      <url>/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/</url>
+      
+        <content type="html"><![CDATA[<p>为了在armbian上搭建一个v2ray的客户端供armbian使用，毕竟有些程序需要跑在armbian服务器上，linux同理。本次教程安装的v2rayA，使用web进行管理，方便。 使用docker进行搭建，请提前安装好docker</p><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol><li>docker（略）</li><li>放开防火墙<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装ufw防火墙工具</span><span class="token function">apt</span> <span class="token function">install</span> ufw<span class="token comment"># 关闭防火墙</span>ufw disable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li></ol><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>查看运行状态<br><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/8d61972f09fd6e5954124.jpg" alt="运行"></p><h3 id="修改部分配置"><a href="#修改部分配置" class="headerlink" title="修改部分配置"></a>修改部分配置</h3><p>浏览器打开v2raya地址<br>   <pre class="line-numbers language-none"><code class="language-none">armbianIP:2017<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p><p>首次进入会要求创建一个账户和密码进行管理</p><p>进入后导入订阅或添加服务端配置</p><p>设置中将端口转发开启，则放开了对应设置的各项端口，可在关于中查看</p><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/68ebc356db06bda4c51d2.jpg" alt="端口分享"></p><h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>需要更新v2raya，非常方便，直接再次拉取一次镜像，将已启动的容器直接停止并删除，重新使用启动命令再启动一个即可，配置等已经在宿主机有保留。不必担心会丢失。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新</span><span class="token function">docker</span> pull mzz2017/v2raya<span class="token comment"># 停止容器</span><span class="token function">docker</span> stop v2raya<span class="token comment"># 删除容器</span><span class="token function">docker</span> <span class="token function">rm</span> v2raya<span class="token comment"># 启动新的容器</span><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="非docker安装"><a href="#非docker安装" class="headerlink" title="非docker安装"></a>非docker安装</h3><p>可以使用该地址中的命令直接安装</p><p><strong><a href="https://github.com/v2rayA/v2rayA-installer">https://github.com/v2rayA/v2rayA-installer</a></strong></p><h4 id="可参考"><a href="#可参考" class="headerlink" title="可参考"></a>可参考</h4><h6 id="v2raya项目地址"><a href="#v2raya项目地址" class="headerlink" title="v2raya项目地址:"></a>v2raya项目地址:</h6><p><a href="https://github.com/v2rayA/v2rayA">https://github.com/v2rayA/v2rayA</a></p><h6 id="v2raya-docker地址："><a href="#v2raya-docker地址：" class="headerlink" title="v2raya docker地址："></a>v2raya docker地址：</h6><p><a href="https://hub.docker.com/r/mzz2017/v2raya">https://hub.docker.com/r/mzz2017/v2raya</a></p><h6 id="v2raya-文档地址-需要魔法-："><a href="#v2raya-文档地址-需要魔法-：" class="headerlink" title="v2raya 文档地址(需要魔法)："></a>v2raya 文档地址(需要魔法)：</h6><p><a href="https://v2raya.org/docs/prologue/introduction/">https://v2raya.org/docs/prologue/introduction/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> armbian </tag>
+            
+            <tag> docker </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> v2ray </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>armbian下安装Openwrt-Docker版</title>
+      <link href="/2023/12/09/jiao-cheng/armbian-xia-an-zhuang-openwrt-docker-ban/"/>
+      <url>/2023/12/09/jiao-cheng/armbian-xia-an-zhuang-openwrt-docker-ban/</url>
+      
+        <content type="html"><![CDATA[<p>前面将机顶盒刷写成armbian也已经安装docker，现在通过docker安装openwrt将armbian当做旁路由使用。主要还是为了解决家庭局域网爬梯问题。</p><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol><li>安装docker(略)</li><li>拉取openwrt镜像</li></ol><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 拉取openwrt 镜像</span> <span class="token function">docker</span> pull unifreq/openwrt-aarch64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>openwrt-docker镜像地址：<a href="https://hub.docker.com/r/unifreq/openwrt-aarch64">https://hub.docker.com/r/unifreq/openwrt-aarch64</a></p><h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> eth0 promisc on<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><pre class="line-numbers language-none"><code class="language-none">docker network create -d macvlan --subnet&#x3D;192.168.1.0&#x2F;24 --gateway&#x3D;192.168.1.1 -o parent&#x3D;eth0 macnet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>–subnet: macvlan 网络所在的网络(一般就为自己的网段)</p><p>–gateway: 网关IP</p><p>-o parent: 用来分配 macvlan 网络的物理网卡</p><h3 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> network <span class="token function">ls</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/20804a816929d345a33e7.png" alt="网络列表"></p><h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token punctuation">\</span>  <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--name</span><span class="token operator">=</span>openwrt <span class="token punctuation">\</span>  <span class="token parameter variable">--restart</span><span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>  <span class="token parameter variable">--network</span><span class="token operator">=</span>macnet <span class="token punctuation">\</span>  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>  <span class="token parameter variable">--ip</span><span class="token operator">=</span><span class="token number">192.168</span>.1.8 <span class="token punctuation">\</span>  unifreq/openwrt-aarch64:latest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>–ip: 容器在网络中的IP</p><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/785d255759cf3636e6854.jpg" alt="运行成功"></p><h3 id="指定LAN口和网关"><a href="#指定LAN口和网关" class="headerlink" title="指定LAN口和网关"></a>指定LAN口和网关</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#第一次运行，需要修改ip地址，lan口网络（192.168.1.7）和网关（192.168.1.1）</span><span class="token function">docker</span> <span class="token builtin class-name">exec</span> openwrt <span class="token function">sed</span> <span class="token parameter variable">-e</span> <span class="token string">"s/192.168.1.1/192.168.1.7/"</span> <span class="token parameter variable">-i</span> /etc/config/network<span class="token comment">#重启容器</span><span class="token function">docker</span> restart openwrt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/10a33fedb89351532e579.jpg" alt="配置网络并重启"></p><h3 id="使用openwrt"><a href="#使用openwrt" class="headerlink" title="使用openwrt"></a>使用openwrt</h3><p>浏览器打开 <a href="http://192.168.1.7/">http://192.168.1.7</a> 即可(上面配置IP)</p><p><img src="https://file.mlapp.cn/usr/uploads/2019/10/1570427399298.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机顶盒 </tag>
+            
+            <tag> armbian </tag>
+            
+            <tag> docker </tag>
+            
+            <tag> 旁路由 </tag>
+            
+            <tag> openwrt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kali-wsl自定义路径安装</title>
       <link href="/2023/09/23/jiao-cheng/kali-wsl-zi-ding-yi-lu-jing-an-zhuang/"/>
       <url>/2023/09/23/jiao-cheng/kali-wsl-zi-ding-yi-lu-jing-an-zhuang/</url>
@@ -49,9 +113,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> armbian </tag>
+            
+            <tag> linux </tag>
             
             <tag> 魔百和 </tag>
             
@@ -80,9 +144,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> docker </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       

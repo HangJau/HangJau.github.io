@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python生活-定时发送新闻联播到微信, Mr Jau">
-    <meta name="description" content="分享一个脚本，通过Python开发的一个新闻联播推送脚本。该项目应用场景广泛炒股的大佬们，新闻工作者，要考公的未来接班人以及需要了解国家大事的，都可以通过这个快速的获取到新闻联播信息。
-免去了定时要去观看30分钟的新闻视频。直接文字输出新闻">
+    <meta name="keywords" content="linux下v2ray客户端安装, Mr Jau">
+    <meta name="description" content="为了在armbian上搭建一个v2ray的客户端供armbian使用，毕竟有些程序需要跑在armbian服务器上，linux同理。本次教程安装的v2rayA，使用web进行管理，方便。 使用docker进行搭建，请提前安装好docker
+准">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python生活-定时发送新闻联播到微信 | Mr Jau</title>
+    <title>linux下v2ray客户端安装 | Mr Jau</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -202,12 +202,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://camo.githubusercontent.com/98437c174b091dd6bfcbd4cd8aaf24debc9c676a9bcaf0d2f72f2a9f9ac93106/68747470733a2f2f692e6c6f6c692e6e65742f323032302f30342f31392f6774334e714f4d696166596270374c2e706e67')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python生活-定时发送新闻联播到微信</h1>
+                    <h1 class="description center-align post-title">linux下v2ray客户端安装</h1>
                 </div>
             </div>
         </div>
@@ -231,12 +231,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/armbian/">
+                                <span class="chip bg-color">armbian</span>
                             </a>
                         
-                            <a href="/tags/%E6%96%B0%E9%97%BB/">
-                                <span class="chip bg-color">新闻</span>
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
+                            </a>
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/tags/v2ray/">
+                                <span class="chip bg-color">v2ray</span>
                             </a>
                         
                     </div>
@@ -247,8 +255,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E4%B8%80%E4%BA%9B%E8%84%9A%E6%9C%AC/" class="post-category">
-                                一些脚本
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                教程
                             </a>
                         
                     </div>
@@ -260,7 +268,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-07-09
+                    2023-12-16
                 </div>
                 
 
@@ -284,94 +292,64 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>分享一个脚本，通过Python开发的一个新闻联播推送脚本。该项目应用场景广泛炒股的大佬们，新闻工作者，要考公的未来接班人以及需要了解国家大事的，都可以通过这个快速的获取到新闻联播信息。</p>
-<p>免去了定时要去观看30分钟的新闻视频。直接文字输出新闻联播，一字不差。直接推送到微信邮箱(微信中的QQ邮箱提醒中绑定的邮箱)</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>项目中分为两部分第一部分通过新闻联播地址获取新闻联播的文字内容，第二部分将文字内容发送到邮箱</p>
-<p>我们来看下关键部分获取新闻联播的文字内容</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
-<span class="token keyword">import</span> requests
-<span class="token keyword">from</span> lxml <span class="token keyword">import</span> etree
-<span class="token keyword">import</span> datetime
-<span class="token keyword">import</span> yagmail
+                <p>为了在armbian上搭建一个v2ray的客户端供armbian使用，毕竟有些程序需要跑在armbian服务器上，linux同理。本次教程安装的v2rayA，使用web进行管理，方便。 使用docker进行搭建，请提前安装好docker</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>docker（略）</li>
+<li>放开防火墙<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装ufw防火墙工具</span>
+<span class="token function">apt</span> <span class="token function">install</span> ufw
+<span class="token comment"># 关闭防火墙</span>
+ufw disable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-headers <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4651.0 Safari/537.36'</span>
-<span class="token punctuation">&#125;</span>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>
+  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>
+  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>
+  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看运行状态<br><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/8d61972f09fd6e5954124.jpg" alt="运行"></p>
+<h3 id="修改部分配置"><a href="#修改部分配置" class="headerlink" title="修改部分配置"></a>修改部分配置</h3><p>浏览器打开v2raya地址<br>   <pre class="line-numbers language-none"><code class="language-none">armbianIP:2017<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<p>首次进入会要求创建一个账户和密码进行管理</p>
+<p>进入后导入订阅或添加服务端配置</p>
+<p>设置中将端口转发开启，则放开了对应设置的各项端口，可在关于中查看</p>
+<p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/68ebc356db06bda4c51d2.jpg" alt="端口分享"></p>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>需要更新v2raya，非常方便，直接再次拉取一次镜像，将已启动的容器直接停止并删除，重新使用启动命令再启动一个即可，配置等已经在宿主机有保留。不必担心会丢失。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新</span>
+<span class="token function">docker</span> pull mzz2017/v2raya
 
+<span class="token comment"># 停止容器</span>
+<span class="token function">docker</span> stop v2raya
 
-<span class="token comment"># 获取新闻</span>
-<span class="token keyword">def</span> <span class="token function">get_hanlder</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">try</span><span class="token punctuation">:</span>
-        rsp <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers<span class="token operator">=</span>headers<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
-        rsp<span class="token punctuation">.</span>raise_for_status<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        rsp<span class="token punctuation">.</span>encoding <span class="token operator">=</span> rsp<span class="token punctuation">.</span>apparent_encoding
-        <span class="token comment"># print(rsp.text)</span>
-        <span class="token keyword">return</span> rsp<span class="token punctuation">.</span>text
-    <span class="token keyword">except</span> requests<span class="token punctuation">.</span>RequestException <span class="token keyword">as</span> error<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
-        exit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># 删除容器</span>
+<span class="token function">docker</span> <span class="token function">rm</span> v2raya
 
-
-<span class="token keyword">def</span> <span class="token function">get_news</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    rsp <span class="token operator">=</span> get_hanlder<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-
-    etr <span class="token operator">=</span> etree<span class="token punctuation">.</span>HTML<span class="token punctuation">(</span>rsp<span class="token punctuation">)</span>
-    titles <span class="token operator">=</span> etr<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">"//li/a/text()"</span><span class="token punctuation">)</span>
-    hrefs <span class="token operator">=</span> etr<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">"//li/a/@href"</span><span class="token punctuation">)</span>
-
-    news <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    summary <span class="token operator">=</span> <span class="token boolean">None</span>
-    <span class="token keyword">for</span> title<span class="token punctuation">,</span> href <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>titles<span class="token punctuation">,</span> hrefs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token string">'《新闻联播》'</span> <span class="token keyword">in</span> title<span class="token punctuation">:</span>
-            <span class="token comment"># 获取新闻概要</span>
-            title_rsp <span class="token operator">=</span> get_hanlder<span class="token punctuation">(</span>href<span class="token punctuation">)</span>
-            summary <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'&lt;div class="video_brief">本期节目主要内容：[\s\S]*。'</span><span class="token punctuation">,</span> title_rsp<span class="token punctuation">)</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span>
-                <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"&lt;/div>\n\n\n"</span>
-            <span class="token keyword">continue</span>
-
-        <span class="token comment"># 新闻标题去掉视频并处理成超链接  橙色 #D2691E</span>
-        tit <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r"\[视频\]?"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> title<span class="token punctuation">)</span>
-
-        subtitle <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f'&lt;a href=\"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>href<span class="token punctuation">&#125;</span></span><span class="token string">\" style="color:#4682B4">&lt;b></span><span class="token interpolation"><span class="token punctuation">&#123;</span>tit<span class="token punctuation">&#125;</span></span><span class="token string">&lt;/b>&lt;/a>'</span></span>
-        summary <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>tit<span class="token punctuation">,</span> subtitle<span class="token punctuation">,</span> summary<span class="token punctuation">)</span>
-
-        <span class="token comment"># 获取新闻正文并添加到news</span>
-        news_text <span class="token operator">=</span> get_hanlder<span class="token punctuation">(</span>href<span class="token punctuation">)</span>
-
-        news_th <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">r'&lt;div class="content_area" id="content_area">.*&lt;/div>'</span><span class="token punctuation">,</span> news_text<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-
-        news<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>subtitle<span class="token punctuation">&#125;</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token punctuation">&#123;</span>news_th<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
-
-    news<span class="token punctuation">.</span>insert<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> summary<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> news
+<span class="token comment"># 启动新的容器</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>
+  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>
+  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>
+  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>
+  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>
+  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<span class="token keyword">def</span> <span class="token function">email_send</span><span class="token punctuation">(</span>rsp<span class="token punctuation">,</span> strdate<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment"># 发送数据到邮箱 此处发送端为QQ邮箱</span>
-    yag <span class="token operator">=</span> yagmail<span class="token punctuation">.</span>SMTP<span class="token punctuation">(</span>user<span class="token operator">=</span><span class="token string">'yourQQ@qq.com'</span><span class="token punctuation">,</span> password<span class="token operator">=</span><span class="token string">'your send code'</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">'smtp.qq.com'</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">465</span><span class="token punctuation">)</span>
-    yag<span class="token punctuation">.</span>send<span class="token punctuation">(</span>to<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"acceptQQ1@qq.com"</span><span class="token punctuation">,</span> <span class="token string">"acceptQQ2@qq.com"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> subject<span class="token operator">=</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>strdate<span class="token punctuation">&#125;</span></span><span class="token string">日新闻联播推送"</span></span><span class="token punctuation">,</span> contents<span class="token operator">=</span>rsp<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'邮件已发送请查收...'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># event,context这两个参数不同的厂商是不同的名称，请根据厂商的示例进行修改即可</span>
-<span class="token keyword">def</span> <span class="token function">scf_run</span><span class="token punctuation">(</span>event<span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment"># 获取日期这里默认为第二天获取前一天的所以-1,若是当天获取则无需-1改为0即可</span>
-    strTime <span class="token operator">=</span> <span class="token punctuation">(</span>datetime<span class="token punctuation">.</span>date<span class="token punctuation">.</span>today<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> datetime<span class="token punctuation">.</span>timedelta<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y%m%d"</span><span class="token punctuation">)</span>
-
-    url <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f'https://tv.cctv.com/lm/xwlb/day/</span><span class="token interpolation"><span class="token punctuation">&#123;</span>strTime<span class="token punctuation">&#125;</span></span><span class="token string">.shtml'</span></span>
-
-    news_text <span class="token operator">=</span> get_news<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-
-    email_send<span class="token punctuation">(</span>news_text<span class="token punctuation">,</span> strTime<span class="token punctuation">)</span>
-
-<span class="token comment"># 若部署在云函数上请把下面这行注释掉,非云函数上不用注释</span>
-scf_run<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>代码释义：<br>首先将新闻联播页面通过Xpath获取我们需要获取的新闻联播的标题以及链接。再将链接和标题进行绑定循环取出并获取内容。<br>将获取的内容作为邮件的内容进行发送</p>
-<p>tips:</p>
-<p>1、默认调用时是获取前一天的内容，若需要获取当天的请把里面(datetime.date.today() + datetime.timedelta(-1)).strftime(“%Y%m%d”) 这段代码中的“-1”修改为“0”，若当天执行时为20:00前可能会获取不到因为当天的新闻还没出来</p>
-<p>2、请注意修改发送者的邮箱和开启SMTP服务后的秘钥</p>
-<h3 id="邮件展示"><a href="#邮件展示" class="headerlink" title="邮件展示"></a>邮件展示</h3><p><img src="https://im.gurl.eu.org/file/327217c814cecb814371b.png" alt="邮件展示"></p>
-<h3 id="定时发送"><a href="#定时发送" class="headerlink" title="定时发送"></a>定时发送</h3><p>定时发送这里有两个选择，第一种就是自己有服务器，通过crontab 进行定时调用。第二种就是通过各大云厂商的云函数进行部署，设定函数触发时间即可。重要的是不需要掏服务器钱，云函数的每月免费额度以及够用了。（目前华为云的云函数是可以免费额度）</p>
+<h3 id="非docker安装"><a href="#非docker安装" class="headerlink" title="非docker安装"></a>非docker安装</h3><p>可以使用该地址中的命令直接安装</p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/v2rayA/v2rayA-installer">https://github.com/v2rayA/v2rayA-installer</a></strong></p>
+<h4 id="可参考"><a href="#可参考" class="headerlink" title="可参考"></a>可参考</h4><h6 id="v2raya项目地址"><a href="#v2raya项目地址" class="headerlink" title="v2raya项目地址:"></a>v2raya项目地址:</h6><p><a target="_blank" rel="noopener" href="https://github.com/v2rayA/v2rayA">https://github.com/v2rayA/v2rayA</a></p>
+<h6 id="v2raya-docker地址："><a href="#v2raya-docker地址：" class="headerlink" title="v2raya docker地址："></a>v2raya docker地址：</h6><p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/mzz2017/v2raya">https://hub.docker.com/r/mzz2017/v2raya</a></p>
+<h6 id="v2raya-文档地址-需要魔法-："><a href="#v2raya-文档地址-需要魔法-：" class="headerlink" title="v2raya 文档地址(需要魔法)："></a>v2raya 文档地址(需要魔法)：</h6><p><a target="_blank" rel="noopener" href="https://v2raya.org/docs/prologue/introduction/">https://v2raya.org/docs/prologue/introduction/</a></p>
 
                 
             </div>
@@ -398,7 +376,7 @@ scf_run<span class="token punctuation">(</span><span class="token number">1</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://HangJau.github.io/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/">https://HangJau.github.io/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/</a>
+                    <a href="https://HangJau.github.io/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/">https://HangJau.github.io/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -436,12 +414,20 @@ scf_run<span class="token punctuation">(</span><span class="token number">1</spa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/armbian/">
+                                    <span class="chip bg-color">armbian</span>
                                 </a>
                             
-                                <a href="/tags/%E6%96%B0%E9%97%BB/">
-                                    <span class="chip bg-color">新闻</span>
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/v2ray/">
+                                    <span class="chip bg-color">v2ray</span>
                                 </a>
                             
                         </div>
@@ -520,16 +506,17 @@ scf_run<span class="token punctuation">(</span><span class="token number">1</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/08/27/jiao-cheng/linux-an-zhuang-docker/">
+                <a href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/">
                     <div class="card-image">
                         
-                        <img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/9d7801894409a6629d28d.png" class="responsive-img" alt="Linux安装docker">
+                        <img src="https://camo.githubusercontent.com/98437c174b091dd6bfcbd4cd8aaf24debc9c676a9bcaf0d2f72f2a9f9ac93106/68747470733a2f2f692e6c6f6c692e6e65742f323032302f30342f31392f6774334e714f4d696166596270374c2e706e67" class="responsive-img" alt="linux下v2ray客户端安装">
                         
-                        <span class="card-title">Linux安装docker</span>
+                        <span class="card-title">linux下v2ray客户端安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -539,9 +526,70 @@ scf_run<span class="token punctuation">(</span><span class="token number">1</spa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-27
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/armbian/">
+                        <span class="chip bg-color">armbian</span>
+                    </a>
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/v2ray/">
+                        <span class="chip bg-color">v2ray</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/09/jiao-cheng/armbian-xia-an-zhuang-openwrt-docker-ban/">
+                    <div class="card-image">
+                        
+                        <img src="https://img-blog.csdnimg.cn/20200909135757172.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZWVuYmVl,size_16,color_FFFFFF,t_70#pic_center" class="responsive-img" alt="armbian下安装Openwrt-Docker版">
+                        
+                        <span class="card-title">armbian下安装Openwrt-Docker版</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -557,66 +605,24 @@ scf_run<span class="token punctuation">(</span><span class="token number">1</spa
                 
                 <div class="card-action article-tags">
                     
+                    <a href="/tags/%E6%9C%BA%E9%A1%B6%E7%9B%92/">
+                        <span class="chip bg-color">机顶盒</span>
+                    </a>
+                    
+                    <a href="/tags/armbian/">
+                        <span class="chip bg-color">armbian</span>
+                    </a>
+                    
                     <a href="/tags/docker/">
                         <span class="chip bg-color">docker</span>
                     </a>
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/%E6%97%81%E8%B7%AF%E7%94%B1/">
+                        <span class="chip bg-color">旁路由</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/07/09/yi-xie-jiao-ben/python-sheng-huo-ding-shi-fa-song-xin-wen-lian-bo-dao-wei-xin/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python生活-定时发送新闻联播到微信">
-                        
-                        <span class="card-title">Python生活-定时发送新闻联播到微信</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-09
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%B8%80%E4%BA%9B%E8%84%9A%E6%9C%AC/" class="post-category">
-                                    一些脚本
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%96%B0%E9%97%BB/">
-                        <span class="chip bg-color">新闻</span>
+                    <a href="/tags/openwrt/">
+                        <span class="chip bg-color">openwrt</span>
                     </a>
                     
                 </div>
