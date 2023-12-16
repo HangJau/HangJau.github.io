@@ -53,7 +53,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -296,26 +296,14 @@
 <p>注意： exe所在的目录则是该分发的自定义路径。建议执行前将exe文件所在目录的所有文件先移动到自己存放的路径</p>
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/78508028c1e73fe5320e9.jpg" alt="解压目录"></p>
 <h3 id="安装分发"><a href="#安装分发" class="headerlink" title="安装分发"></a>安装分发</h3><p>直接双击exe文件会进行初始化，根据提示创建用户和密码即可。当进入到linux里面时证明该wsl已安装完成。你会发现exe所在目录生成了一个磁盘文件vhdx。该文件则是该系统的磁盘文件。</p>
-<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 创建一个文件夹用于存放字体</span>
-<span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /usr/share/fonts/windows 
-<span class="token comment"># 将Windows系统中的字体导入到kali中</span>
-<span class="token function">sudo</span> <span class="token function">cp</span> <span class="token parameter variable">-r</span> /mnt/c/Windows/Fonts/*.ttf /usr/share/fonts/windows/
-<span class="token comment"># 下载字体管理器</span>
-<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> fontconfig
-
-<span class="token comment"># 打开配置文件  此处需要vi操作知识。建议 vi 进入后 按 G 一定要大写模式 然后按 小写  o  再插入 export的所有命令</span>
-<span class="token function">sudo</span> <span class="token function">vi</span> /etc/profile
-<span class="token comment"># 在上述文件中添加</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LANG</span></span><span class="token operator">=</span>zh_CN.UTF-8
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LANGUAGE</span></span><span class="token operator">=</span>zh_CN.UTF-8
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>zh_CN.UTF-8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个文件夹用于存放字体</span></span><br><span class="line">sudo mkdir -p /usr/share/fonts/windows </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将Windows系统中的字体导入到kali中</span></span><br><span class="line">sudo cp -r /mnt/c/Windows/Fonts/*.ttf /usr/share/fonts/windows/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载字体管理器</span></span><br><span class="line">sudo apt install -y fontconfig</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开配置文件  此处需要vi操作知识。建议 vi 进入后 按 G 一定要大写模式 然后按 小写  o  再插入 <span class="built_in">export</span>的所有命令</span></span><br><span class="line">sudo vi /etc/profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在上述文件中添加</span></span><br><span class="line">export LANG=zh_CN.UTF-8</span><br><span class="line">export LANGUAGE=zh_CN.UTF-8</span><br><span class="line">export LC_ALL=zh_CN.UTF-8</span><br></pre></td></tr></table></figure>
 
 
 <p>其他分发到这里就已经结束，kali的话请继续往下看，由于kali是最小化安装所以需要再安装kali的完整工具包</p>
-<h3 id="KaLi完整安装"><a href="#KaLi完整安装" class="headerlink" title="KaLi完整安装"></a>KaLi完整安装</h3><h4 id="检查更新和更新"><a href="#检查更新和更新" class="headerlink" title="检查更新和更新"></a>检查更新和更新</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token parameter variable">-y</span> upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="KaLi完整安装"><a href="#KaLi完整安装" class="headerlink" title="KaLi完整安装"></a>KaLi完整安装</h3><h4 id="检查更新和更新"><a href="#检查更新和更新" class="headerlink" title="检查更新和更新"></a>检查更新和更新</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt -y upgrade</span><br></pre></td></tr></table></figure>
 
 <h4 id="安装完整工具包"><a href="#安装完整工具包" class="headerlink" title="安装完整工具包"></a>安装完整工具包</h4><p>这里安装可能耗时比较长请耐心等待</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> kali-linux-large<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></table></figure>
 
 <h5 id="语言选择"><a href="#语言选择" class="headerlink" title="语言选择"></a>语言选择</h5><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/c66fff46094140b49e7a0.png" alt="语言"></p>
 <h5 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h5><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/9d5d6e871cc5ec6300aa9.png" alt="DHCP"></p>
@@ -323,7 +311,7 @@
 <h5 id="kismet"><a href="#kismet" class="headerlink" title="kismet"></a>kismet</h5><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/a555be4e903fd54a85e1d.png" alt="kismet"></p>
 <h5 id="sslh"><a href="#sslh" class="headerlink" title="sslh"></a>sslh</h5><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/18c446ca82df21fe1ada5.png" alt="sslh"></p>
 <h4 id="验证工具"><a href="#验证工具" class="headerlink" title="验证工具"></a>验证工具</h4><p>出现下图情况证明包安装成功，可以愉快的玩耍了</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/e3ea2cd1ae568f248e5a4.jpg" alt="nmap"></p>
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Linux安装docker, Mr Jau">
     <meta name="description" content="记录下docker服务的安装，目前只涉及到了centos系统，此贴会记录博主在不同系统中的docker安装教程。(其他的什么时候更新就看博主啥时候遇到了)
-CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
+CentOS docker 安装清除已安装的部分(若是新机器可跳过)1yum rem">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -53,7 +53,7 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -285,21 +285,21 @@ CentOS docker 安装清除已安装的部分(若是新机器可跳过)yum remo">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>记录下docker服务的安装，目前只涉及到了centos系统，此贴会记录博主在不同系统中的docker安装教程。(其他的什么时候更新就看博主啥时候遇到了)</p>
-<h3 id="CentOS-docker-安装"><a href="#CentOS-docker-安装" class="headerlink" title="CentOS docker 安装"></a>CentOS docker 安装</h3><h4 id="清除已安装的部分-若是新机器可跳过"><a href="#清除已安装的部分-若是新机器可跳过" class="headerlink" title="清除已安装的部分(若是新机器可跳过)"></a>清除已安装的部分(若是新机器可跳过)</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum remove <span class="token function">docker</span> <span class="token punctuation">\</span>docker-client <span class="token punctuation">\</span>docker-client-latest <span class="token punctuation">\</span>docker-common <span class="token punctuation">\</span>docker-latest <span class="token punctuation">\</span>docker-latest-logrotate <span class="token punctuation">\</span>docker-logrotate <span class="token punctuation">\</span>docker-engine<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="CentOS-docker-安装"><a href="#CentOS-docker-安装" class="headerlink" title="CentOS docker 安装"></a>CentOS docker 安装</h3><h4 id="清除已安装的部分-若是新机器可跳过"><a href="#清除已安装的部分-若是新机器可跳过" class="headerlink" title="清除已安装的部分(若是新机器可跳过)"></a>清除已安装的部分(若是新机器可跳过)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \docker-client \docker-client-latest \docker-common \docker-latest \docker-latest-logrotate \docker-logrotate \docker-engine</span><br></pre></td></tr></table></figure>
 
 <h4 id="前置处理"><a href="#前置处理" class="headerlink" title="前置处理"></a>前置处理</h4><p>yum-complete-transaction    清理未完成事务<br>yum install -y yum-utils    安装依赖工具<br>yum clean all               清楚未完成的包和缓存<br>yum  update                 更新</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum <span class="token function">install</span> <span class="token parameter variable">-y</span> yum-utils <span class="token operator">&amp;&amp;</span> yum clean all <span class="token operator">&amp;&amp;</span> yum-complete-transaction <span class="token operator">&amp;&amp;</span> yum update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-complete-transaction &amp;&amp; yum install -y yum-utils &amp;&amp; yum clean all &amp;&amp; yum-complete-transaction &amp;&amp; yum update</span><br></pre></td></tr></table></figure>
 
-<h4 id="安装底层依赖"><a href="#安装底层依赖" class="headerlink" title="安装底层依赖"></a>安装底层依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> device-mapper-persistent-data lvm2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装底层依赖"><a href="#安装底层依赖" class="headerlink" title="安装底层依赖"></a>安装底层依赖</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
 
-<h4 id="更新yum缓存"><a href="#更新yum缓存" class="headerlink" title="更新yum缓存"></a>更新yum缓存</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum makecache fast<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="更新yum缓存"><a href="#更新yum缓存" class="headerlink" title="更新yum缓存"></a>更新yum缓存</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
 
-<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> docker-ce docker-ce-cli containerd.io<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
 
-<h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span> <span class="token operator">&amp;&amp;</span> systemctl status <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker &amp;&amp; systemctl status docker</span><br></pre></td></tr></table></figure>
 
 <h4 id="测试运行docker"><a href="#测试运行docker" class="headerlink" title="测试运行docker"></a>测试运行docker</h4><p>此步会输出hello-world，输出成功即docker安装成功，就可以愉快的玩耍啦。🎉🎉</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
                 
             </div>
             <hr/>

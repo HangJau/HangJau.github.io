@@ -52,7 +52,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -327,7 +327,7 @@
 <p><img src="https://im.gurl.eu.org/file/8546315aaf28e61d99265.png" alt="5步骤"></p>
 <p><img src="https://im.gurl.eu.org/file/c3a9d47d7f38dd5bb7e08.png" alt="7~9步骤"></p>
 <h4 id="将系统写入到机顶盒"><a href="#将系统写入到机顶盒" class="headerlink" title="将系统写入到机顶盒"></a>将系统写入到机顶盒</h4><p>上一步中不是已经进入到系统了吗？ 直接输入写入命令(下方命令)此时会列出能够写入的机顶盒型号。选择我们对应的机顶盒型号并输入对应的ID，这里我的是M401A则<strong>选择ID”306“</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">armbian-install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">armbian-install</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://im.gurl.eu.org/file/76575a6eb7a18b7e7c1a6.png" alt="选择机顶盒型号"></p>
 <p>2、选择系统磁盘格式为ext4,而后等待系统写入到机顶盒就行</p>
@@ -335,17 +335,7 @@
 <p>3、当页面不在滚动出现<strong>root@armbian:~#</strong> 输入<strong>poweroff</strong>关机</p>
 <p>4、当机顶盒完全关机后 拔下U盘，拔下电源，再重新插入电源，按电源键开机。此时若正常启动后会让输入登录用户名和密码输入root 或者刚我们创建的用户都行，当进入到下面页面则系统刷入成功，就可以愉快的玩耍啦。</p>
 <p><img src="https://im.gurl.eu.org/file/1f9cfecb2370e6fa8b598.png" alt="进入系统"></p>
-<h3 id="安装一些必要软件"><a href="#安装一些必要软件" class="headerlink" title="安装一些必要软件"></a>安装一些必要软件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新一下软件包索引</span>
-<span class="token function">apt</span> update <span class="token parameter variable">-y</span>
-
-<span class="token comment"># 安装nettools</span>
-<span class="token function">apt</span> <span class="token function">install</span> net-tools <span class="token parameter variable">-y</span>
-<span class="token comment"># 验证</span>
-<span class="token function">ifconfig</span>
-
-<span class="token comment"># 安装docker  选择docker ID 中途可能要选择下载软件的地址 选择阿里云的即可</span>
-armbian-software
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="安装一些必要软件"><a href="#安装一些必要软件" class="headerlink" title="安装一些必要软件"></a>安装一些必要软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新一下软件包索引</span></span><br><span class="line">apt update -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装nettools</span></span><br><span class="line">apt install net-tools -y</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line">ifconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装docker  选择docker ID 中途可能要选择下载软件的地址 选择阿里云的即可</span></span><br><span class="line">armbian-software</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个刷写过程并不难，照着教程操作即可，若有问题百度一下就能解决。本次刷写我这边未遇到任何问题一把过。</p>

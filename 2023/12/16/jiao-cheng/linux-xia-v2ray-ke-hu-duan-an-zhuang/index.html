@@ -53,7 +53,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -295,54 +295,19 @@
                 <p>为了在armbian上搭建一个v2ray的客户端供armbian使用，毕竟有些程序需要跑在armbian服务器上，linux同理。本次教程安装的v2rayA，使用web进行管理，方便。 使用docker进行搭建，请提前安装好docker</p>
 <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
 <li>docker（略）</li>
-<li>放开防火墙<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装ufw防火墙工具</span>
-<span class="token function">apt</span> <span class="token function">install</span> ufw
-<span class="token comment"># 关闭防火墙</span>
-ufw disable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>放开防火墙<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装ufw防火墙工具</span></span><br><span class="line">apt install ufw</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">关闭防火墙</span></span><br><span class="line">ufw disable </span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mzz2017/v2raya</span><br></pre></td></tr></table></figure>
 
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>
-  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>
-  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>
-  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --privileged \</span><br><span class="line">  --network=host \</span><br><span class="line">  --name v2raya \</span><br><span class="line">  -e V2RAYA_LOG_FILE=/tmp/v2raya.log \</span><br><span class="line">  -e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \</span><br><span class="line">  -e V2RAYA_NFTABLES_SUPPORT=off \</span><br><span class="line">  -v /lib/modules:/lib/modules:ro \</span><br><span class="line">  -v /etc/resolv.conf:/etc/resolv.conf \</span><br><span class="line">  -v /etc/v2raya:/etc/v2raya \</span><br><span class="line">  mzz2017/v2raya</span><br></pre></td></tr></table></figure>
 <p>查看运行状态<br><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/8d61972f09fd6e5954124.jpg" alt="运行"></p>
-<h3 id="修改部分配置"><a href="#修改部分配置" class="headerlink" title="修改部分配置"></a>修改部分配置</h3><p>浏览器打开v2raya地址<br>   <pre class="line-numbers language-none"><code class="language-none">armbianIP:2017<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<h3 id="修改部分配置"><a href="#修改部分配置" class="headerlink" title="修改部分配置"></a>修改部分配置</h3><p>浏览器打开v2raya地址<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">armbianIP:2017</span><br></pre></td></tr></table></figure></p>
 <p>首次进入会要求创建一个账户和密码进行管理</p>
 <p>进入后导入订阅或添加服务端配置</p>
 <p>设置中将端口转发开启，则放开了对应设置的各项端口，可在关于中查看</p>
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/68ebc356db06bda4c51d2.jpg" alt="端口分享"></p>
 <h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>需要更新v2raya，非常方便，直接再次拉取一次镜像，将已启动的容器直接停止并删除，重新使用启动命令再启动一个即可，配置等已经在宿主机有保留。不必担心会丢失。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新</span>
-<span class="token function">docker</span> pull mzz2017/v2raya
-
-<span class="token comment"># 停止容器</span>
-<span class="token function">docker</span> stop v2raya
-
-<span class="token comment"># 删除容器</span>
-<span class="token function">docker</span> <span class="token function">rm</span> v2raya
-
-<span class="token comment"># 启动新的容器</span>
-<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>
-  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>
-  <span class="token parameter variable">--name</span> v2raya <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_LOG_FILE</span><span class="token operator">=</span>/tmp/v2raya.log <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_V2RAY_BIN</span><span class="token operator">=</span>/usr/local/bin/v2ray <span class="token punctuation">\</span>
-  <span class="token parameter variable">-e</span> <span class="token assign-left variable">V2RAYA_NFTABLES_SUPPORT</span><span class="token operator">=</span>off <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /lib/modules:/lib/modules:ro <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /etc/resolv.conf:/etc/resolv.conf <span class="token punctuation">\</span>
-  <span class="token parameter variable">-v</span> /etc/v2raya:/etc/v2raya <span class="token punctuation">\</span>
-  mzz2017/v2raya<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新</span></span><br><span class="line">docker pull mzz2017/v2raya</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止容器</span></span><br><span class="line">docker stop v2raya</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除容器</span></span><br><span class="line">docker rm v2raya</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动新的容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --privileged \</span><br><span class="line">  --network=host \</span><br><span class="line">  --name v2raya \</span><br><span class="line">  -e V2RAYA_LOG_FILE=/tmp/v2raya.log \</span><br><span class="line">  -e V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray \</span><br><span class="line">  -e V2RAYA_NFTABLES_SUPPORT=off \</span><br><span class="line">  -v /lib/modules:/lib/modules:ro \</span><br><span class="line">  -v /etc/resolv.conf:/etc/resolv.conf \</span><br><span class="line">  -v /etc/v2raya:/etc/v2raya \</span><br><span class="line">  mzz2017/v2raya</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="非docker安装"><a href="#非docker安装" class="headerlink" title="非docker安装"></a>非docker安装</h3><p>可以使用该地址中的命令直接安装</p>

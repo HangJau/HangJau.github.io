@@ -10,7 +10,7 @@
 安装docker(略)
 拉取openwrt镜像
 
-# 拉取open">
+12# 拉取op">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -57,7 +57,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -305,33 +305,21 @@
 <li>安装docker(略)</li>
 <li>拉取openwrt镜像</li>
 </ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 拉取openwrt 镜像</span>
- <span class="token function">docker</span> pull unifreq/openwrt-aarch64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取openwrt 镜像</span></span><br><span class="line"> docker pull unifreq/openwrt-aarch64</span><br></pre></td></tr></table></figure>
 <p>openwrt-docker镜像地址：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/unifreq/openwrt-aarch64">https://hub.docker.com/r/unifreq/openwrt-aarch64</a></p>
-<h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> eth0 promisc on<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip link set eth0 promisc on</span><br></pre></td></tr></table></figure>
 
-<h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><pre class="line-numbers language-none"><code class="language-none">docker network create -d macvlan --subnet&#x3D;192.168.1.0&#x2F;24 --gateway&#x3D;192.168.1.1 -o parent&#x3D;eth0 macnet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 macnet</span><br></pre></td></tr></table></figure>
 
 <p>–subnet: macvlan 网络所在的网络(一般就为自己的网段)</p>
 <p>–gateway: 网关IP</p>
 <p>-o parent: 用来分配 macvlan 网络的物理网卡</p>
-<h3 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> network <span class="token function">ls</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/20804a816929d345a33e7.png" alt="网络列表"></p>
-<h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token punctuation">\</span>
-  <span class="token parameter variable">-d</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--name</span><span class="token operator">=</span>openwrt <span class="token punctuation">\</span>
-  <span class="token parameter variable">--restart</span><span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
-  <span class="token parameter variable">--network</span><span class="token operator">=</span>macnet <span class="token punctuation">\</span>
-  <span class="token parameter variable">--privileged</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--ip</span><span class="token operator">=</span><span class="token number">192.168</span>.1.8 <span class="token punctuation">\</span>
-  unifreq/openwrt-aarch64:latest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -d \</span><br><span class="line">  --name=openwrt \</span><br><span class="line">  --restart=unless-stopped \</span><br><span class="line">  --network=macnet \</span><br><span class="line">  --privileged \</span><br><span class="line">  --ip=192.168.1.8 \</span><br><span class="line">  unifreq/openwrt-aarch64:latest</span><br></pre></td></tr></table></figure>
 <p>–ip: 容器在网络中的IP</p>
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/785d255759cf3636e6854.jpg" alt="运行成功"></p>
-<h3 id="指定LAN口和网关"><a href="#指定LAN口和网关" class="headerlink" title="指定LAN口和网关"></a>指定LAN口和网关</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#第一次运行，需要修改ip地址，lan口网络（192.168.1.7）和网关（192.168.1.1）</span>
-<span class="token function">docker</span> <span class="token builtin class-name">exec</span> openwrt <span class="token function">sed</span> <span class="token parameter variable">-e</span> <span class="token string">"s/192.168.1.1/192.168.1.7/"</span> <span class="token parameter variable">-i</span> /etc/config/network
-
-<span class="token comment">#重启容器</span>
-<span class="token function">docker</span> restart openwrt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="指定LAN口和网关"><a href="#指定LAN口和网关" class="headerlink" title="指定LAN口和网关"></a>指定LAN口和网关</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">第一次运行，需要修改ip地址，lan口网络（192.168.1.7）和网关（192.168.1.1）</span></span><br><span class="line">docker exec openwrt sed -e &quot;s/192.168.1.1/192.168.1.7/&quot; -i /etc/config/network</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重启容器</span></span><br><span class="line">docker restart openwrt</span><br></pre></td></tr></table></figure>
 <p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/10a33fedb89351532e579.jpg" alt="配置网络并重启"></p>
 <h3 id="使用openwrt"><a href="#使用openwrt" class="headerlink" title="使用openwrt"></a>使用openwrt</h3><p>浏览器打开 <a target="_blank" rel="noopener" href="http://192.168.1.7/">http://192.168.1.7</a> 即可(上面配置IP)</p>
 <p><img src="https://file.mlapp.cn/usr/uploads/2019/10/1570427399298.png"></p>
