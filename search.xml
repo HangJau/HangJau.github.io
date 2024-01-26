@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>上传包到Pypi，共享给全球用户</title>
+      <link href="/2024/01/26/jiao-cheng/shang-chuan-bao-dao-pypi/"/>
+      <url>/2024/01/26/jiao-cheng/shang-chuan-bao-dao-pypi/</url>
+      
+        <content type="html"><![CDATA[<p>本文章记录将自己的Python包发布到Pypi上，供全球用户使用。</p><h4 id="构建包安装"><a href="#构建包安装" class="headerlink" title="构建包安装"></a>构建包安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装打包工具和上传工具</span></span><br><span class="line">python -m pip install build twine</span><br></pre></td></tr></table></figure><h4 id="你的项目结构分布"><a href="#你的项目结构分布" class="headerlink" title="你的项目结构分布"></a>你的项目结构分布</h4><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/4f07f9c650ac975de6402.jpg" alt="项目结构"></p><h4 id="setup内容"><a href="#setup内容" class="headerlink" title="setup内容"></a>setup内容</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup, find_packages</span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&quot;项目名&quot;</span>,</span><br><span class="line">    version=<span class="string">&quot;0.1.0&quot;</span>,</span><br><span class="line">    packages=find_packages(),</span><br><span class="line">    install_requires=[</span><br><span class="line">        <span class="string">&quot;requests&gt;=2.22.0&quot;</span>  <span class="comment"># 这个只是示例</span></span><br><span class="line">        <span class="comment"># 在这里列出你的库所需的其他Python包</span></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    author=<span class="string">&quot;所有用户&quot;</span>,</span><br><span class="line">    author_email=<span class="string">&quot;邮箱&quot;</span>,</span><br><span class="line">    description=<span class="string">&quot;项目简单说明&quot;</span>,</span><br><span class="line">    long_description=<span class="built_in">open</span>(<span class="string">&quot;README.md&quot;</span>).read(),  <span class="comment"># 读取README 文件作为项目介绍</span></span><br><span class="line">    long_description_content_type=<span class="string">&quot;text/markdown&quot;</span>, <span class="comment"># 文档类型</span></span><br><span class="line">    license=<span class="string">&quot;MIT&quot;</span>, <span class="comment"># 协议</span></span><br><span class="line">    url=<span class="string">&quot;https://github.com/yourusername/my-awesome-package&quot;</span>, <span class="comment"># 项目地址</span></span><br><span class="line">    classifiers=[</span><br><span class="line">        <span class="string">&quot;Programming Language :: Python :: 3&quot;</span>,  <span class="comment"># 代表支持 所有Python3</span></span><br><span class="line">        <span class="string">&quot;License :: OSI Approved :: GNU General Public License (GPL)&quot;</span>, <span class="comment"># lincense 说明</span></span><br><span class="line">        <span class="string">&quot;Operating System :: OS Independent&quot;</span>, <span class="comment"># 操作系统</span></span><br><span class="line"></span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure><h4 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建操作，会在一级目录下生成build，dist等目录 dist则是打包好的文件，一般会是一个tar.gz 或者 whl</span> </span><br><span class="line">python -m build </span><br></pre></td></tr></table></figure><h4 id="上传准备"><a href="#上传准备" class="headerlink" title="上传准备"></a>上传准备</h4><ol><li>先注册一个Pypi账户。目前Pypi要求2FA验证登录(可以使用Google Authenticator)</li><li>获取一个API令牌</li><li>本地用户目录下创建一个.pypirc文件，文件内容如下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[pypi]</span><br><span class="line">username = __token__</span><br><span class="line">password = API令牌</span><br></pre></td></tr></table></figure></li></ol><h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可检查包是否冲突 可不执行</span></span><br><span class="line">twine check dist\*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传项目到pypi</span></span><br><span class="line">twine upload dist\*</span><br></pre></td></tr></table></figure><p><img src="https://e0180ed0.picture-bed-8ov.pages.dev/file/2b6e4727f5a723b554c79.jpg" alt="上传成功"></p><p>上传后输出包路径则说明上传包成功了，这个时候就可以去<a href="https://pypi.org/">pypi</a>搜索包名，或者直接打开输出的链接即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Pypi </tag>
+            
+            <tag> 打包 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux下v2ray客户端安装</title>
       <link href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/"/>
       <url>/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/</url>
@@ -20,11 +49,11 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> armbian </tag>
             
             <tag> docker </tag>
+            
+            <tag> linux </tag>
             
             <tag> v2ray </tag>
             
@@ -113,9 +142,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> armbian </tag>
+            
+            <tag> linux </tag>
             
             <tag> 魔百和 </tag>
             
@@ -144,9 +173,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> docker </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
