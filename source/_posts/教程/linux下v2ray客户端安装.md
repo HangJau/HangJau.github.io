@@ -1,7 +1,7 @@
 ---
 layout: .
 title: linux下v2ray客户端安装
-img: https://camo.githubusercontent.com/98437c174b091dd6bfcbd4cd8aaf24debc9c676a9bcaf0d2f72f2a9f9ac93106/68747470733a2f2f692e6c6f6c692e6e65742f323032302f30342f31392f6774334e714f4d696166596270374c2e706e67
+cover: https://s1.locimg.com/2024/09/10/9fd1a5776f1da.png
 date: 2023-12-16 21:12:15
 categories: 教程
 tags:
