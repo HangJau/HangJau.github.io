@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Mr Jau
-subtitle: 'HangJau Blog'
+title: 二一袖 
+subtitle: '大数据测试工程师'
 description: ''
 keywords:
-author: Hang jau
+author: 二一袖 
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -29,6 +29,12 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+
+# APlayer
+# https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md
+aplayer:
+  meting: true
+  asset_inject: false
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -97,7 +103,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-matery
+theme: anzhiyu
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

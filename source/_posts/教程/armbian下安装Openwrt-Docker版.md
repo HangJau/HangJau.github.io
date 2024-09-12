@@ -2,7 +2,7 @@
 layout: .
 title: armbian下安装Openwrt-Docker版
 date: 2023-12-09 20:27:15
-img: https://img-blog.csdnimg.cn/20200909135757172.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZWVuYmVl,size_16,color_FFFFFF,t_70#pic_center
+cover: https://s1.locimg.com/2024/09/10/9269e147e02c2.jpg
 categories: 教程
 tags:
   - 机顶盒

@@ -2,7 +2,7 @@
 layout: .
 title: Linux安装docker
 date: 2023-08-27 14:55:47
-img: https://e0180ed0.picture-bed-8ov.pages.dev/file/9d7801894409a6629d28d.png
+cover: https://e0180ed0.picture-bed-8ov.pages.dev/file/9d7801894409a6629d28d.png
 categories: 教程
 tags: 
     - docker

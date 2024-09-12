@@ -1,6 +1,7 @@
 ---
 layout: source
 title: Python生活-定时发送新闻联播到微信
+cover: https://s1.locimg.com/2024/09/11/bd9d10a0998d7.png
 date: 2023-07-09 21:20:20
 categories: 一些脚本
 tags: 

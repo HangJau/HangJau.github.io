@@ -1,7 +1,7 @@
 ---
 title: 上传包到Pypi，共享给全球用户
 date: 2024-01-26 21:48:55
-img: 
+cover: https://s1.locimg.com/2024/09/10/fa9eba8312f2c.png
 categories: 教程
 tags:
     - Python

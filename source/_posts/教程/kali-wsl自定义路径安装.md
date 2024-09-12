@@ -1,7 +1,7 @@
 ---
 title: kali-wsl自定义路径安装
 date: 2023-09-23 20:13:28
-img: https://w.wallhaven.cc/full/j3/wallhaven-j3vgym.png
+cover: https://w.wallhaven.cc/full/j3/wallhaven-j3vgym.png
 categories: 教程
 tags:
     - linux
