@@ -234,7 +234,7 @@ post_copyright:
   enable: true
   decode: false
   author_href:
-  location: 地球
+  location: 四川
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
   avatarSinks: false # hover时头像下沉
@@ -793,7 +793,7 @@ aside:
     category: true
   card_author:
     enable: true
-    description: 大数据测试工程师  # 默认为站点描述
+    description: 一个人一旦开始认真做事,被嘲弄、被耻笑的几率将远远高于被夸奖、被鼓励的几率——这几乎是肯定的  # 默认为站点描述
     name_link: /
 
   card_announcement:
@@ -845,7 +845,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: true
-  publish_date: 4/1/2021 00:00:00
+  publish_date: 7/10/2023 10:07:00
 
 # Console - Newest Comments
 newest_comments:
@@ -1035,9 +1035,9 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: 生活明朗
-  subTitle: 万物可爱。
-  siteText: hangjau.github.io
+  title: 若无闲事挂心头
+  subTitle: 便是人间好时节
+  siteText: 
   category:
     - name: 实用脚本
       path: /categories/实用脚本/
