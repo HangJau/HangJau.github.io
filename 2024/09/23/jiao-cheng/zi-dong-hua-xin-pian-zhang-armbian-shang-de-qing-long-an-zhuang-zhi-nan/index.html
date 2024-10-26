@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>自动化新篇章：Armbian上的青龙安装指南 | 二一袖</title><meta name="keywords" content="armbian,linux,魔百和,M401A"><meta name="author" content="二一袖"><meta name="copyright" content="二一袖"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="自动化新篇章：Armbian上的青龙安装指南"><meta name="application-name" content="自动化新篇章：Armbian上的青龙安装指南"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="自动化新篇章：Armbian上的青龙安装指南"><meta property="og:url" content="https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/index.html"><meta property="og:site_name" content="二一袖"><meta property="og:description" content="前面老赵，已经将购买的机顶盒刷成了armbian并已安装了docker，不知道怎么刷的可以看下机顶盒秒变服务器这篇文章。接下来咱们开始进阶安装自动化平台，方便我们更好的利用这个“机顶盒”。  准备工作 电脑一台 (肯定要能连接到armbian上的哈) ssh软件(登录到armbian需要。刚需!!"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s1.locimg.com/2024/09/11/92d56262b8304.png"><meta property="article:author" content="二一袖"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s1.locimg.com/2024/09/11/92d56262b8304.png"><meta name="description" content="前面老赵，已经将购买的机顶盒刷成了armbian并已安装了docker，不知道怎么刷的可以看下机顶盒秒变服务器这篇文章。接下来咱们开始进阶安装自动化平台，方便我们更好的利用这个“机顶盒”。  准备工作 电脑一台 (肯定要能连接到armbian上的哈) ssh软件(登录到armbian需要。刚需!!"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://bu.dusays.com/2023/04/09/643293b1230f7.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"二一袖","backTitle":"二一袖"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 二一袖","link":"链接: ","source":"来源: 二一袖","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '二一袖',
+  title: '自动化新篇章：Armbian上的青龙安装指南',
+  postAI: '',
+  pageFillDescription: '准备工作, docker服务确认, 下载并启动自动化平台, 青龙初始化, 青龙使用, 依赖安装, 本地脚本同步平台, 脚本的自动化运行, 结语前面老赵已经将购买的机顶盒刷成了并已安装了不知道怎么刷的可以看下机顶盒秒变服务器这篇文章接下来咱们开始进阶安装自动化平台方便我们更好的利用这个机顶盒准备工作电脑一台肯定要能连接到上的哈软件登录到需要刚需常用的服务确认重启服务若未启动则启动已启动则重启保证查看服务状态看到即可下载并启动自动化平台这里老赵找到了一键安装脚本小白友好直接一路回车就行脚本安全执行下面命令一路根据提示回车就行青龙初始化当以上步骤都执行和检查完成后那这时已经成功现在让我们通过自己电脑的浏览器打开网页机顶盒进行初始化平台初次打开会有初始化过程如下通知可以暂时先跳过青龙使用以上青龙面板已经搭建好了现在可以愉快的玩耍了先教大家如何进行任务上传执行和依赖安装可以从本地上传和网络仓库中下载这里先说一下本地上传吧依赖安装进入依赖管理右上角新建依赖选择输入需要安装的依赖名称即可后续脚本缺什么依赖就安装什么依赖就好本地脚本同步平台首先进入左侧脚本管理模块然后点击右上角号选择本地文件然后点击上传选择本地文件点击确定就上传成功后直接点保存你若需要修改就修改一下后进行保存脚本的自动化运行点击定时任务右上角新建任务输入名称执行命令定时规则后直接点确定定时任务就设定好了咱们就不用管了它会在我们设定的时候执行并发通知定时规则是形式不懂的可以百度搜一下很简单的我上面的标识就是每天点执行一次结语青龙应用很多人都在用用来干什么也千奇百怪大部分都是拿来薅羊毛的有签到拿京豆的也有各种极速版薅金币的也有做站任务升级账号的想要薅羊毛的我这里也有资源和项目关注发送羊毛获取资源不保证一定能薅呢另外我自己所写的一些实用脚本都可以在该平台使用方便你我他',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-26 14:16:27',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">二一袖</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/music/?id=445808089&amp;server=netease&amp;type=playlist"><span> 音乐馆</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/reward/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="/img/reward/wechatpay.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/reward/alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/img/reward/alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/M401A/" style="font-size: 1.05rem;">M401A<sup>2</sup></a><a href="/tags/Pypi/" style="font-size: 1.05rem;">Pypi<sup>1</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/armbian/" style="font-size: 1.05rem;">armbian<sup>4</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>3</sup></a><a href="/tags/kali/" style="font-size: 1.05rem;">kali<sup>1</sup></a><a href="/tags/linux/" style="font-size: 1.05rem;">linux<sup>5</sup></a><a href="/tags/openwrt/" style="font-size: 1.05rem;">openwrt<sup>1</sup></a><a href="/tags/v2ray/" style="font-size: 1.05rem;">v2ray<sup>1</sup></a><a href="/tags/wsl/" style="font-size: 1.05rem;">wsl<sup>1</sup></a><a href="/tags/%E5%8F%AF%E8%BD%AC%E5%80%BA/" style="font-size: 1.05rem;">可转债<sup>1</sup></a><a href="/tags/%E6%89%93%E5%8C%85/" style="font-size: 1.05rem;">打包<sup>1</sup></a><a href="/tags/%E6%96%B0%E9%97%BB/" style="font-size: 1.05rem;">新闻<sup>1</sup></a><a href="/tags/%E6%97%81%E8%B7%AF%E7%94%B1/" style="font-size: 1.05rem;">旁路由<sup>1</sup></a><a href="/tags/%E6%9C%BA%E9%A1%B6%E7%9B%92/" style="font-size: 1.05rem;">机顶盒<sup>1</sup></a><a href="/tags/%E6%B1%BD%E8%BD%A6%E7%A5%A8/" style="font-size: 1.05rem;">汽车票<sup>1</sup></a><a href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/" style="font-size: 1.05rem;">魔百和<sup>2</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url">教程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/armbian/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>armbian</span></a><a class="article-meta__tags" href="/tags/linux/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>linux</span></a><a class="article-meta__tags" href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>魔百和</span></a><a class="article-meta__tags" href="/tags/M401A/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>M401A</span></a></span></div></div><h1 class="post-title" itemprop="name headline">自动化新篇章：Armbian上的青龙安装指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-09-23T01:39:28.000Z" title="发表于 2024-09-23 09:39:28">2024-09-23</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-10-26T06:16:27.291Z" title="更新于 2024-10-26 14:16:27">2024-10-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">752</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为四川"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>四川</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s1.locimg.com/2024/09/11/92d56262b8304.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/"><header><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url">教程</a><a href="/tags/armbian/" tabindex="-1" itemprop="url">armbian</a><a href="/tags/linux/" tabindex="-1" itemprop="url">linux</a><a href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/" tabindex="-1" itemprop="url">魔百和</a><a href="/tags/M401A/" tabindex="-1" itemprop="url">M401A</a><h1 id="CrawlerTitle" itemprop="name headline">自动化新篇章：Armbian上的青龙安装指南</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">二一袖</span><time itemprop="dateCreated datePublished" datetime="2024-09-23T01:39:28.000Z" title="发表于 2024-09-23 09:39:28">2024-09-23</time><time itemprop="dateCreated datePublished" datetime="2024-10-26T06:16:27.291Z" title="更新于 2024-10-26 14:16:27">2024-10-26</time></header><p>前面老赵，已经将购买的机顶盒刷成了armbian并已安装了docker，不知道怎么刷的可以看下机顶盒秒变服务器这篇文章。接下来咱们开始进阶安装自动化平台，方便我们更好的利用这个“机顶盒”。 </p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>电脑一台 (肯定要能连接到armbian上的哈)</li>
+<li>ssh软件(登录到armbian需要。刚需!! 常用的<a target="_blank" rel="noopener" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">putty</a> <a target="_blank" rel="noopener" href="https://www.xshell.com/zh/free-for-home-school/">xshell</a>)</li>
+</ul>
+<h2 id="docker服务确认"><a href="#docker服务确认" class="headerlink" title="docker服务确认"></a>docker服务确认</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启docker服务若未启动则启动，已启动则重启保证</span></span><br><span class="line">service docker restart</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看docker服务状态 看到running，active 即可</span></span><br><span class="line">service docker status</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载并启动自动化平台"><a href="#下载并启动自动化平台" class="headerlink" title="下载并启动自动化平台"></a>下载并启动自动化平台</h2><p>这里老赵找到了一键安装脚本，小白友好直接一路回车就行(脚本安全！！)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行下面命令 一路根据提示回车就行</span></span><br><span class="line">wget -q https://raw.githubusercontents.com/Oreomeow/VIP/main/Scripts/sh/ql.sh -O ql.sh &amp;&amp; bash ql.sh</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/26/f76d6bc1e328f.png" alt="一键脚本"></p>
+<h4 id="青龙初始化"><a href="#青龙初始化" class="headerlink" title="青龙初始化"></a>青龙初始化</h4><p>当以上步骤都执行和检查完成后，那这时已经成功99%，现在让我们通过自己电脑的浏览器打开网页“http:&#x2F;&#x2F;{机顶盒IP:5700}”进行初始化平台。</p>
+<p>初次打开会有初始化过程如下，通知可以暂时先跳过<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/8b927ccfd53cb.png" alt="青龙网页"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/37bcb702043ee.png" alt="通知"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/b2568f8d0afe1.png" alt="账户"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/b5e3fe249f973.png" alt="完成"></p>
+<h2 id="青龙使用"><a href="#青龙使用" class="headerlink" title="青龙使用"></a>青龙使用</h2><p>以上青龙面板已经搭建好了，现在可以愉快的玩耍了，先教大家如何进行任务上传执行和依赖安装。可以从本地上传和网络仓库中下载。这里先说一下本地上传吧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/386065408b67e.png" alt="青龙"></p>
+<h3 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h3><p>进入依赖管理，右上角“新建依赖”。选择Python3，输入需要安装的依赖名称即可。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/26/aebab23e15f87.png" alt="安装依赖"></p>
+<p>Tips:</p>
+<pre><code>后续脚本缺什么依赖就安装什么依赖就好
+</code></pre>
+<h3 id="本地脚本同步平台"><a href="#本地脚本同步平台" class="headerlink" title="本地脚本同步平台"></a>本地脚本同步平台</h3><p>首先进入左侧脚本管理模块，然后点击右上角 “+” 号 选择本地文件，然后点击上传选择“本地文件” 点击确定就OK<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/25/f32389cba0265.png" alt="本地文件"></p>
+<p>Tips:</p>
+<pre><code>上传成功后直接点保存，你若需要修改就修改一下后进行保存。
+</code></pre>
+<h3 id="脚本的自动化运行"><a href="#脚本的自动化运行" class="headerlink" title="脚本的自动化运行"></a>脚本的自动化运行</h3><p>点击定时任务,右上角新建任务，输入名称、执行命令、定时规则后直接点确定。定时任务就设定好了，咱们就不用管了。它会在我们设定的时候执行并发通知。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/26/612c8c73a3531.png" alt="创建任务"></p>
+<p>Tips:</p>
+<pre><code>定时规则是crontab形式，不懂的可以百度搜一下很简单的，我上面的标识就是每天10点执行一次
+</code></pre>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>青龙应用很多人都在用，用来干什么也千奇百怪，大部分都是拿来薅羊毛的，有jd签到拿京豆的，也有各种极速版薅金币的，也有做b站任务升级账号的。想要薅羊毛的，我这里也有资源和项目。关注发送“羊毛”获取资源，不保证一定能薅呢。另外我自己所写的一些实用脚本都可以在该平台使用，方便你我他。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="/img/avatar.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="/img/avatar.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">二一袖</div><div class="post-copyright__author_desc">大数据测试工程师</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/')">自动化新篇章：Armbian上的青龙安装指南</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/reward/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="/img/reward/wechatpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/reward/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="/img/reward/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=自动化新篇章：Armbian上的青龙安装指南&amp;url=https://hangjau.github.io/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/&amp;pic=https://s1.locimg.com/2024/09/11/92d56262b8304.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://HangJau.github.io" target="_blank">二一袖</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/armbian/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>armbian<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/linux/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>linux<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>魔百和<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/M401A/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>M401A<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s1.locimg.com/2024/09/11/92d56262b8304.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024/09/18/shi-yong-jiao-ben/python-sheng-huo-dang-python-yu-shang-ke-zhuan-zhai/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/11/bd9d10a0998d7.png" onerror="onerror=null;src='/img/img_404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python生活-当Python遇上可转债(一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/09/03/jiao-cheng/ji-ding-he-bian-fu-wu-qi/" title="机顶盒秒变服务器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/11/92d56262b8304.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-03</div><div class="title">机顶盒秒变服务器</div></div></a></div><div><a href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/" title="linux下v2ray客户端安装"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/10/9fd1a5776f1da.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-12-16</div><div class="title">linux下v2ray客户端安装</div></div></a></div><div><a href="/2023/12/09/jiao-cheng/armbian-xia-an-zhuang-openwrt-docker-ban/" title="armbian下安装Openwrt-Docker版"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/10/9269e147e02c2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-12-09</div><div class="title">armbian下安装Openwrt-Docker版</div></div></a></div><div><a href="/2023/09/23/jiao-cheng/kali-wsl-zi-ding-yi-lu-jing-an-zhuang/" title="kali-wsl自定义路径安装"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/13/4c1da37df1abf.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-23</div><div class="title">kali-wsl自定义路径安装</div></div></a></div><div><a href="/2023/08/27/jiao-cheng/linux-an-zhuang-docker/" title="Linux安装docker"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/13/208e27ee5009d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-08-27</div><div class="title">Linux安装docker</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/404_error_page.gif'" alt="avatar"/></div><div class="author-info__description">一个人一旦开始认真做事,被嘲弄、被耻笑的几率将远远高于被夸奖、被鼓励的几率——这几乎是肯定的</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">二一袖</h1><div class="author-info__desc">大数据测试工程师</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/hangjau" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(/img/gonzhonghao.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E6%9C%8D%E5%8A%A1%E7%A1%AE%E8%AE%A4"><span class="toc-number">2.</span> <span class="toc-text">docker服务确认</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B9%B3%E5%8F%B0"><span class="toc-number">3.</span> <span class="toc-text">下载并启动自动化平台</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%92%E9%BE%99%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.0.1.</span> <span class="toc-text">青龙初始化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%92%E9%BE%99%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">青龙使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="toc-number">4.1.</span> <span class="toc-text">依赖安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E8%84%9A%E6%9C%AC%E5%90%8C%E6%AD%A5%E5%B9%B3%E5%8F%B0"><span class="toc-number">4.2.</span> <span class="toc-text">本地脚本同步平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E8%A1%8C"><span class="toc-number">4.3.</span> <span class="toc-text">脚本的自动化运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/" title="自动化新篇章：Armbian上的青龙安装指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/11/92d56262b8304.png" onerror="this.onerror=null;this.src='/img/img_404.jpg'" alt="自动化新篇章：Armbian上的青龙安装指南"/></a><div class="content"><a class="title" href="/2024/09/23/jiao-cheng/zi-dong-hua-xin-pian-zhang-armbian-shang-de-qing-long-an-zhuang-zhi-nan/" title="自动化新篇章：Armbian上的青龙安装指南">自动化新篇章：Armbian上的青龙安装指南</a><time datetime="2024-09-23T01:39:28.000Z" title="发表于 2024-09-23 09:39:28">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/18/shi-yong-jiao-ben/python-sheng-huo-dang-python-yu-shang-ke-zhuan-zhai/" title="Python生活-当Python遇上可转债(一)"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/11/bd9d10a0998d7.png" onerror="this.onerror=null;this.src='/img/img_404.jpg'" alt="Python生活-当Python遇上可转债(一)"/></a><div class="content"><a class="title" href="/2024/09/18/shi-yong-jiao-ben/python-sheng-huo-dang-python-yu-shang-ke-zhuan-zhai/" title="Python生活-当Python遇上可转债(一)">Python生活-当Python遇上可转债(一)</a><time datetime="2024-09-18T01:27:18.000Z" title="发表于 2024-09-18 09:27:18">2024-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/13/shi-yong-jiao-ben/pyhton-sheng-huo-qi-che-piao-yu-piao-jian-kong/" title="Python生活-为你的乡愁上一个保险——汽车票监控"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/11/bd9d10a0998d7.png" onerror="this.onerror=null;this.src='/img/img_404.jpg'" alt="Python生活-为你的乡愁上一个保险——汽车票监控"/></a><div class="content"><a class="title" href="/2024/09/13/shi-yong-jiao-ben/pyhton-sheng-huo-qi-che-piao-yu-piao-jian-kong/" title="Python生活-为你的乡愁上一个保险——汽车票监控">Python生活-为你的乡愁上一个保险——汽车票监控</a><time datetime="2024-09-13T06:45:36.000Z" title="发表于 2024-09-13 14:45:36">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/26/jiao-cheng/shang-chuan-bao-dao-pypi/" title="上传包到Pypi，共享给全球用户"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/10/fa9eba8312f2c.png" onerror="this.onerror=null;this.src='/img/img_404.jpg'" alt="上传包到Pypi，共享给全球用户"/></a><div class="content"><a class="title" href="/2024/01/26/jiao-cheng/shang-chuan-bao-dao-pypi/" title="上传包到Pypi，共享给全球用户">上传包到Pypi，共享给全球用户</a><time datetime="2024-01-26T13:48:55.000Z" title="发表于 2024-01-26 21:48:55">2024-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/" title="linux下v2ray客户端安装"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://s1.locimg.com/2024/09/10/9fd1a5776f1da.png" onerror="this.onerror=null;this.src='/img/img_404.jpg'" alt="linux下v2ray客户端安装"/></a><div class="content"><a class="title" href="/2023/12/16/jiao-cheng/linux-xia-v2ray-ke-hu-duan-an-zhuang/" title="linux下v2ray客户端安装">linux下v2ray客户端安装</a><time datetime="2023-12-16T13:12:15.000Z" title="发表于 2023-12-16 21:12:15">2023-12-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 二一袖</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/HangJau" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/img_404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/music/?id=445808089&amp;server=netease&amp;type=playlist"><span> 音乐馆</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/M401A/" style="font-size: 0.88rem;">M401A<sup>2</sup></a><a href="/tags/Pypi/" style="font-size: 0.88rem;">Pypi<sup>1</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/armbian/" style="font-size: 0.88rem;">armbian<sup>4</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>3</sup></a><a href="/tags/kali/" style="font-size: 0.88rem;">kali<sup>1</sup></a><a href="/tags/linux/" style="font-size: 0.88rem;">linux<sup>5</sup></a><a href="/tags/openwrt/" style="font-size: 0.88rem;">openwrt<sup>1</sup></a><a href="/tags/v2ray/" style="font-size: 0.88rem;">v2ray<sup>1</sup></a><a href="/tags/wsl/" style="font-size: 0.88rem;">wsl<sup>1</sup></a><a href="/tags/%E5%8F%AF%E8%BD%AC%E5%80%BA/" style="font-size: 0.88rem;">可转债<sup>1</sup></a><a href="/tags/%E6%89%93%E5%8C%85/" style="font-size: 0.88rem;">打包<sup>1</sup></a><a href="/tags/%E6%96%B0%E9%97%BB/" style="font-size: 0.88rem;">新闻<sup>1</sup></a><a href="/tags/%E6%97%81%E8%B7%AF%E7%94%B1/" style="font-size: 0.88rem;">旁路由<sup>1</sup></a><a href="/tags/%E6%9C%BA%E9%A1%B6%E7%9B%92/" style="font-size: 0.88rem;">机顶盒<sup>1</sup></a><a href="/tags/%E6%B1%BD%E8%BD%A6%E7%A5%A8/" style="font-size: 0.88rem;">汽车票<sup>1</sup></a><a href="/tags/%E9%AD%94%E7%99%BE%E5%92%8C/" style="font-size: 0.88rem;">魔百和<sup>2</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/playlist?id=445808089&amp;creatorId=320345845&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
